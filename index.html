@@ -3,82 +3,465 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timber Torch</title>
+    <title>Timber Torch | Outdoor Pellet Heater</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #0f172a;
+            --card: #111827;
+            --accent: #f97316;
+            --accent-2: #22d3ee;
+            --text: #e5e7eb;
+            --muted: #9ca3af;
+            --border: rgba(255,255,255,0.08);
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: radial-gradient(circle at 20% 20%, rgba(34,211,238,0.08), transparent 25%),
+                        radial-gradient(circle at 80% 0%, rgba(249,115,22,0.12), transparent 25%),
+                        linear-gradient(135deg, #0b1220, #0f172a 60%, #0b1220);
+            color: var(--text);
+            min-height: 100vh;
         }
 
-        .container {
-            text-align: center;
-            background: #ffffff;
-            padding: 50px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
         }
 
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        p {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 10px;
-        }
-
-        a {
-            color: #0056b3;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .phone {
-            font-weight: bold;
+        .brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.04em;
             font-size: 20px;
-            color: #333;
+            color: #fff;
         }
 
-        .download-btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 24px;
-            background-color: #0056b3;
+        .nav-links a {
+            color: var(--muted);
+            margin-left: 18px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover { color: #fff; }
+
+        main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 80px; }
+
+        .hero {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .hero-text h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            margin: 0 0 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text p {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.7;
+            margin: 0 0 24px;
+        }
+
+        .cta-group { display: flex; gap: 12px; flex-wrap: wrap; }
+
+        .btn {
+            border: none;
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            font-size: 15px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f97316, #fb923c);
+            color: #0f172a;
+            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.35);
+        }
+
+        .btn-secondary {
+            background: rgba(34, 211, 238, 0.1);
+            color: #e0f2fe;
+            border: 1px solid rgba(34, 211, 238, 0.4);
+        }
+
+        .btn:hover { transform: translateY(-1px); }
+
+        .hero-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(249,115,22,0.1);
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            border: 1px solid rgba(249,115,22,0.35);
+            margin-bottom: 18px;
+        }
+
+        .section {
+            margin-top: 60px;
+        }
+
+        .section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            margin: 0 0 16px;
+        }
+
+        .section p { color: var(--muted); max-width: 760px; line-height: 1.7; }
+
+        .grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .grid.features { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+        .grid.media { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .card h3 { margin: 0 0 8px; font-size: 18px; }
+        .card p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+        .media-card {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        video, .media-card img {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #000;
+        }
+
+        .muted { color: var(--muted); }
+
+        .contact {
+            display: grid;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .contact a {
             color: #fff;
             text-decoration: none;
-            font-size: 18px;
-            border-radius: 6px;
-            transition: background-color .3s;
+            font-weight: 600;
         }
 
-        .download-btn:hover {
-            background-color: #003f82;
+        .contact a span { color: var(--muted); font-weight: 500; }
+
+        footer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 28px 24px 60px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        @media (max-width: 640px) {
+            nav { padding: 16px; }
+            .nav-links { display: none; }
+            main { padding: 24px 16px 60px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Website Under Construction</h1>
-        <p>You can reach us at:</p>
-        <p>Email: <a href="mailto:timbertorch@waynetool.net">timbertorch@waynetool.net</a></p>
-        <p class="phone">Phone: 800-932-0108</p>
+    <header>
+        <nav>
+            <div class="brand">Timber Torch</div>
+            <div class="nav-links">
+                <a href="#product">Product</a>
+                <a href="#media">Media</a>
+                <a href="#contact">Contact</a>
+                <a href="#manual">Manual</a>
+            </div>
+        </nav>
+    </header>
 
-        <!-- Download Button -->
-        <a class="download-btn" 
-           href="https://raw.githubusercontent.com/timbertorch/timbertorch/main/Timber%20Torch%20Owners%20Manual.pdf" 
-           download>
-           Download Owners Manual (PDF)
-        </a>
-    </div>
+    <main>
+        <section class="hero" id="product">
+            <div class="hero-text">
+                <div class="pill">Premium Outdoor Pellet Heater</div>
+                <h1>Warmth and atmosphere, engineered for every gathering.</h1>
+                <p>Timber Torch transforms patios, tailgates, and campsites with a clean-burning pellet flame and rugged stainless steel design. Built to travel, built to impress.</p>
+                <div class="cta-group">
+                    <a class="btn btn-primary" href="#media">Watch it in action</a>
+                    <a class="btn btn-secondary" href="mailto:timbertorch@waynetool.net">Email us</a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <img src="media/pellet%20final.jpg" alt="Timber Torch pellet heater at dusk">
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="features-heading">
+            <h2 id="features-heading">Why Timber Torch</h2>
+            <p>Engineered for reliability and ease, Timber Torch blends powerful heat with straightforward setup so you can focus on the moments that matter.</p>
+            <div class="grid features">
+                <div class="card">
+                    <h3>Portable & Ready</h3>
+                    <p>Sturdy stainless construction, modular parts, and intuitive setup mean you can take Timber Torch wherever the night takes you.</p>
+                </div>
+                <div class="card">
+                    <h3>Clean-Burning Pellets</h3>
+                    <p>Pellet fuel delivers consistent heat with minimal smoke, giving you the glow of a wood flame without the hassle.</p>
+                </div>
+                <div class="card">
+                    <h3>Built for Weather</h3>
+                    <p>Premium materials and thoughtful ventilation help the burner thrive through cold nights, breezy evenings, and tailgate seasons.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="media" aria-labelledby="media-heading">
+            <h2 id="media-heading">See the Torch</h2>
+            <p>Real footage of Timber Torch lighting up patios and campsites. Watch the flame pattern, the ease of assembly, and the even pellet burn.</p>
+            <div class="grid media">
+                <div class="card media-card">
+                    <video controls data-poster-time="0.15">
+                        <source src="media/IMG_8925%20(2).MOV" type="video/quicktime">
+                        <source src="media/IMG_8925%20(2).MOV" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p class="muted">Quick start and steady flame you can see from any seat.</p>
+                </div>
+                <div class="card media-card">
+                    <video controls data-poster-time="0.15">
+                        <source src="media/IMG_9195.MOV" type="video/quicktime">
+                        <source src="media/IMG_9195.MOV" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p class="muted">Pellet-fed burn keeps your crew warm without constant tending.</p>
+                </div>
+                <div class="card media-card">
+                    <video controls data-poster-time="0.15">
+                        <source src="media/IMG_9199.MOV" type="video/quicktime">
+                        <source src="media/IMG_9199.MOV" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p class="muted">Compact footprint makes it perfect for patios and tailgates alike.</p>
+                </div>
+                <div class="card media-card">
+                    <video controls data-poster-time="0.15">
+                        <source src="media/IMG_9324%20(1).mov" type="video/quicktime">
+                        <source src="media/IMG_9324%20(1).mov" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p class="muted">Durable build and stable base stay reliable even when the wind picks up.</p>
+                </div>
+                <div class="card media-card">
+                    <img src="media/thumbnail_IMG_8924.jpg" alt="Pellet heater glowing at night">
+                    <p class="muted">High-intensity glow adds atmosphere while the pellet flame does the heating.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Talk with the Timber Torch Team</h2>
+            <p>Ready to bring Timber Torch to your venue, dealership, or backyard? Reach out for more information or join the waiting list.</p>
+            <div class="contact" aria-live="polite">
+                <div><span style="color: var(--muted);">Email</span><br><a href="mailto:timbertorch@waynetool.net">timbertorch@waynetool.net</a></div>
+                <div><span style="color: var(--muted);">Phone</span><br><a href="tel:18009320108">800-932-0108</a></div>
+            </div>
+            <form id="contact-form" class="card" style="margin-top: 12px; display: grid; gap: 12px;">
+                <div>
+                    <label for="name" style="display:block; color: var(--muted); margin-bottom: 6px;">Name</label>
+                    <input id="name" name="name" type="text" required style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background: #0b1324; color: #fff;">
+                </div>
+                <div>
+                    <label for="email" style="display:block; color: var(--muted); margin-bottom: 6px;">Email</label>
+                    <input id="email" name="email" type="email" required style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background: #0b1324; color: #fff;">
+                </div>
+                <div>
+                    <label for="interest" style="display:block; color: var(--muted); margin-bottom: 6px;">I’d like to</label>
+                    <select id="interest" name="interest" required style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background: #0b1324; color: #fff;">
+                        <option value="get more information">Get more information</option>
+                        <option value="join the waiting list">Join the waiting list</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="message" style="display:block; color: var(--muted); margin-bottom: 6px;">Message</label>
+                    <textarea id="message" name="message" rows="4" style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border); background: #0b1324; color: #fff;" placeholder="Share details about your venue, timeline, or questions."></textarea>
+                </div>
+                <div style="display:flex; justify-content:flex-start; gap:12px; align-items:center; flex-wrap:wrap;">
+                    <button type="submit" class="btn btn-primary">Send Email</button>
+                    <span id="form-status" class="muted" aria-live="polite"></span>
+                </div>
+            </form>
+        </section>
+
+        <section class="section" id="manual" aria-labelledby="manual-heading">
+            <h2 id="manual-heading">Owners Manual</h2>
+            <p>Download the complete guide for safe setup, fueling, maintenance, and troubleshooting.</p>
+            <div class="cta-group">
+                <a class="btn btn-primary" href="Timber%20Torch%20Owners%20Manual.pdf" download>Download PDF</a>
+                <a class="btn btn-secondary" href="Timber%20Torch%20Owners%20Manual.pdf" target="_blank" rel="noreferrer">Open in browser</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        Proudly crafting reliable heat for unforgettable nights.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const videos = document.querySelectorAll('#media video');
+            const form = document.getElementById('contact-form');
+            const status = document.getElementById('form-status');
+
+            videos.forEach((video) => {
+                const source = Array.from(video.querySelectorAll('source')).map((s) => s.src).find(Boolean) || video.currentSrc || video.src;
+                if (!source) return;
+
+                const capture = document.createElement('video');
+                capture.muted = true;
+                capture.playsInline = true;
+                capture.crossOrigin = 'anonymous';
+                capture.preload = 'auto';
+                capture.src = source;
+
+                const targetTime = parseFloat(video.dataset.posterTime || '0.1');
+
+                const cleanup = () => {
+                    capture.pause();
+                    capture.src = '';
+                    capture.remove();
+                };
+
+                const drawPoster = () => {
+                    const canvas = document.createElement('canvas');
+                    const width = capture.videoWidth || 640;
+                    const height = capture.videoHeight || 360;
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    if (!ctx) return cleanup();
+
+                    ctx.drawImage(capture, 0, 0, width, height);
+                    video.poster = canvas.toDataURL('image/jpeg', 0.82);
+                    cleanup();
+                };
+
+                const handleSeeked = () => {
+                    capture.removeEventListener('seeked', handleSeeked);
+                    drawPoster();
+                };
+
+                const handleLoaded = () => {
+                    capture.removeEventListener('loadeddata', handleLoaded);
+                    capture.addEventListener('seeked', handleSeeked);
+                    try {
+                        capture.currentTime = isNaN(targetTime) ? 0.1 : targetTime;
+                    } catch (e) {
+                        cleanup();
+                    }
+                };
+
+                const handleError = () => {
+                    capture.removeEventListener('error', handleError);
+                    cleanup();
+                };
+
+                capture.addEventListener('loadeddata', handleLoaded, { once: true });
+                capture.addEventListener('error', handleError, { once: true });
+                capture.load();
+            });
+
+            if (form) {
+                form.addEventListener('submit', (event) => {
+                    event.preventDefault();
+
+                    const formData = new FormData(form);
+                    const name = formData.get('name')?.toString().trim() || 'Someone';
+                    const email = formData.get('email')?.toString().trim() || '';
+                    const interest = formData.get('interest')?.toString().trim() || 'get more information';
+                    const message = formData.get('message')?.toString().trim() || '';
+
+                    const subject = encodeURIComponent(`Timber Torch inquiry: ${interest}`);
+                    const bodyLines = [
+                        `Name: ${name}`,
+                        `Email: ${email}`,
+                        `Interest: ${interest}`,
+                        '',
+                        'Message:',
+                        message || 'N/A'
+                    ];
+                    const body = encodeURIComponent(bodyLines.join('\n'));
+
+                    const mailtoLink = `mailto:timbertorch@waynetool.net?subject=${subject}&body=${body}`;
+
+                    status.textContent = 'Opening your email client...';
+                    window.location.href = mailtoLink;
+                    setTimeout(() => {
+                        status.textContent = 'If the email window did not open, please email timbertorch@waynetool.net directly.';
+                    }, 1200);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
